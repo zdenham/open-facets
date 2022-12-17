@@ -11,7 +11,7 @@ contract Ownable is OwnableModifiers, IERC173 {
     /**
      * @dev Returns the address of the current owner.
      */
-    function owner() public view virtual returns (address) {
+    function owner() public view virtual override returns (address) {
         return OwnableLib.owner();
     }
 
@@ -30,7 +30,12 @@ contract Ownable is OwnableModifiers, IERC173 {
      * @dev Transfers ownership of the contract to a new account (`newOwner`).
      * Can only be called by the current owner.
      */
-    function transferOwnership(address newOwner) public virtual onlyOwner {
+    function transferOwnership(address newOwner)
+        public
+        virtual
+        override
+        onlyOwner
+    {
         return OwnableLib.transferOwnership(newOwner);
     }
 }

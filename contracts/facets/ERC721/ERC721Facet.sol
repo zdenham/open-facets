@@ -6,21 +6,33 @@ import {IERC721} from "./IERC721.sol";
 import {ERC721Lib} from "./ERC721Lib.sol";
 
 contract ERC721Facet is IERC721 {
-    function balanceOf(address owner) public view virtual returns (uint256) {
+    function balanceOf(address owner)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
         return ERC721Lib.balanceOf(owner);
     }
 
     /**
      * @dev See {IERC721-ownerOf}.
      */
-    function ownerOf(uint256 tokenId) public view virtual returns (address) {
+    function ownerOf(uint256 tokenId)
+        public
+        view
+        virtual
+        override
+        returns (address)
+    {
         return ERC721Lib.ownerOf(tokenId);
     }
 
     /**
      * @dev See {IERC721-approve}.
      */
-    function approve(address to, uint256 tokenId) public virtual {
+    function approve(address to, uint256 tokenId) public virtual override {
         return ERC721Lib.approve(to, tokenId);
     }
 
@@ -31,6 +43,7 @@ contract ERC721Facet is IERC721 {
         public
         view
         virtual
+        override
         returns (address)
     {
         return ERC721Lib.getApproved(tokenId);
@@ -39,7 +52,11 @@ contract ERC721Facet is IERC721 {
     /**
      * @dev See {IERC721-setApprovalForAll}.
      */
-    function setApprovalForAll(address operator, bool approved) public virtual {
+    function setApprovalForAll(address operator, bool approved)
+        public
+        virtual
+        override
+    {
         return ERC721Lib.setApprovalForAll(operator, approved);
     }
 
@@ -50,6 +67,7 @@ contract ERC721Facet is IERC721 {
         public
         view
         virtual
+        override
         returns (bool)
     {
         return ERC721Lib.isApprovedForAll(owner, operator);
@@ -62,7 +80,7 @@ contract ERC721Facet is IERC721 {
         address from,
         address to,
         uint256 tokenId
-    ) public virtual {
+    ) public virtual override {
         return ERC721Lib.transferFrom(from, to, tokenId);
     }
 
@@ -73,7 +91,7 @@ contract ERC721Facet is IERC721 {
         address from,
         address to,
         uint256 tokenId
-    ) public virtual {
+    ) public virtual override {
         return ERC721Lib.safeTransferFrom(from, to, tokenId);
     }
 
@@ -85,7 +103,7 @@ contract ERC721Facet is IERC721 {
         address to,
         uint256 tokenId,
         bytes memory data
-    ) public virtual {
+    ) public virtual override {
         return ERC721Lib.safeTransferFrom(from, to, tokenId, data);
     }
 }
