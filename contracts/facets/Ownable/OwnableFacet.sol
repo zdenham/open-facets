@@ -4,10 +4,10 @@
 pragma solidity ^0.8.0;
 
 import {OwnableModifiers} from "./OwnableModifiers.sol";
-import {IOwnableEvents} from "./IOwnableEvents.sol";
+import {IERC173} from "./IERC173.sol";
 import {OwnableLib} from "./OwnableLib.sol";
 
-contract Ownable is OwnableModifiers, IOwnableEvents {
+contract Ownable is OwnableModifiers, IERC173 {
     /**
      * @dev Returns the address of the current owner.
      */
