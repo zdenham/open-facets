@@ -14,11 +14,7 @@ import {OwnableLib} from "./facets/Ownable/OwnableLib.sol";
 import {IDiamondCut} from "./facets/Diamond/Cut/IDiamondCut.sol";
 
 contract Diamond {
-    constructor(
-        address _contractOwner,
-        address _diamondCutFacet,
-        address initializer
-    ) payable {
+    constructor(address _contractOwner, address _diamondCutFacet) payable {
         OwnableLib.transferOwnership(_contractOwner);
 
         // Add the diamondCut external function from the diamondCutFacet
@@ -30,7 +26,7 @@ contract Diamond {
             action: IDiamondCut.FacetCutAction.Add,
             functionSelectors: functionSelectors
         });
-        DiamondCutLib.diamondCut(cut, initializer, "");
+        DiamondCutLib.diamondCut(cut, address(0), "");
     }
 
     // Find facet for function that is called and execute the

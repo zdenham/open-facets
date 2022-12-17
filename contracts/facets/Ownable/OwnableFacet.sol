@@ -7,7 +7,7 @@ import {OwnableModifiers} from "./OwnableModifiers.sol";
 import {IERC173} from "./IERC173.sol";
 import {OwnableLib} from "./OwnableLib.sol";
 
-contract Ownable is OwnableModifiers, IERC173 {
+contract OwnableFacet is OwnableModifiers, IERC173 {
     /**
      * @dev Returns the address of the current owner.
      */

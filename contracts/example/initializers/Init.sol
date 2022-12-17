@@ -18,7 +18,7 @@ import {IERC165} from "../../facets/Diamond/Loupe/IERC165.sol";
 // with data from a deployment script. Use the init function to initialize state variables
 // of your diamond. Add parameters to the init funciton if you need to.
 
-contract DiamondInit {
+contract Init {
     // You can add parameters to this function in order to pass in
     // data to set your own state variables
     function init() external {
