@@ -2,10 +2,10 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC721Events} from "./IERC721Events.sol";
+import {IERC721} from "./IERC721.sol";
 import {ERC721Lib} from "./ERC721Lib.sol";
 
-contract ERC721Facet is IERC721Events {
+contract ERC721Facet is IERC721 {
     function balanceOf(address owner) public view virtual returns (uint256) {
         return ERC721Lib.balanceOf(owner);
     }
