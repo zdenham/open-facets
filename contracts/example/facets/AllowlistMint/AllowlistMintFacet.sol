@@ -28,7 +28,7 @@ contract AllowlistMintFacet is OwnableModifiers {
         return AllowlistMintLib.enforceIsAllowlisted(_address);
     }
 
-    function mint(address to, uint256 tokenId) internal {
+    function mint(address to, uint256 tokenId) external virtual {
         return AllowlistMintLib.mint(to, tokenId);
     }
 }

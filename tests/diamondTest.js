@@ -8,7 +8,8 @@ const {
 
 const { deployDiamond } = require('../scripts/deploy.js');
 
-const { assert } = require('chai');
+const { assert, expect } = require('chai');
+const { ethers } = require('hardhat');
 
 describe('DiamondTest', async function () {
   let diamondAddress;
@@ -19,6 +20,7 @@ describe('DiamondTest', async function () {
   let receipt;
   let result;
   const addresses = [];
+  let signers;
 
   before(async function () {
     diamondAddress = await deployDiamond();
@@ -31,6 +33,50 @@ describe('DiamondTest', async function () {
       diamondAddress
     );
     ownershipFacet = await ethers.getContractAt('OwnableFacet', diamondAddress);
+
+    signers = await ethers.getSigners();
+  });
+
+  it('should allow minting from the allowlist, and block transferring to the blocklist', async () => {
+    const ownerSigner = signers[0];
+    const otherSigner = signers[1];
+    const allowlistMintFacet = await ethers.getContractAt(
+      'AllowlistMintFacet',
+      diamondAddress
+    );
+
+    await allowlistMintFacet.setIsAllowlisted(ownerSigner.address, true);
+
+    const isOnAllowlist = await allowlistMintFacet.isAllowlisted(
+      ownerSigner.address
+    );
+    expect(isOnAllowlist).to.equal(true);
+
+    await allowlistMintFacet.mint(ownerSigner.address, 1);
+
+    const nftFacet = await ethers.getContractAt(
+      'TransferBlocklistNFTFacet',
+      diamondAddress
+    );
+
+    const owner = await nftFacet.ownerOf(1);
+
+    expect(owner).to.equal(ownerSigner.address);
+
+    await nftFacet.setIsBlocked(otherSigner.address, true);
+
+    const isBlocked = await nftFacet.isBlocked(otherSigner.address);
+
+    expect(isBlocked).to.equal(true);
+
+    await expect(
+      nftFacet.transferFrom(ownerSigner.address, otherSigner.address, 1)
+    ).to.be.reverted;
+
+    await nftFacet.transferFrom(ownerSigner.address, signers[2].address, 1);
+    const newOwner = await nftFacet.ownerOf(1);
+
+    expect(newOwner).to.equal(signers[2].address);
   });
 
   it('should have five facets -- call to facetAddresses function', async () => {
