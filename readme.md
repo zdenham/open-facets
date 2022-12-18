@@ -10,7 +10,7 @@ I summarize some of the design choices below, would love any feedback and critiq
 
 ## Facet Folders
 
-Because we break facets down into various parts (handlers, logic, storage, modifiers, interfaces), it constitutes having a separate folder for each facet rather than just a single file.
+Because we break facets down into various parts (external handlers, logic, storage, modifiers, interfaces), it constitutes having a separate folder for each facet rather than just a single file.
 
 
 
