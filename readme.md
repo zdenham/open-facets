@@ -2,7 +2,7 @@
 
 This is a proof of concept of what a smart contract development library for EIP-2535 diamonds could look like, using ERC721 as an example.
 
-The "contracts/example" directory includes what an implementation using the library could look like. The example shows an ERC721 with an allowlist gated mint, and special functionality that prevents transferring tokens to blocked addresses. This example was chosen to showcase both inheritance and composability with the library. 
+The "contracts/example" directory includes an example implementation using the library. The example shows an ERC721 with an allowlist gated mint, and special functionality that prevents transferring tokens to blocked addresses. This was chosen to showcase both inheritance and composability with the library. 
 
 I summarize some of the design choices below, would love any feedback and critiques!
 
